@@ -1,0 +1,78 @@
+C51 COMPILER V9.60.0.0   KEYBOARD                                                          12/28/2020 08:57:05 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYBOARD
+OBJECT MODULE PLACED IN .\Objects\keyboard.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE keyboard.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -keyboard.lst) TABS(2) OBJECT(.\Objects\keyboard.obj)
+
+line level    source
+
+   1          #include"keyboard.h"
+   2          uchar key_sign='n';
+   3          
+   4          uchar witch_key()
+   5          {
+   6   1        static uchar key_mem;
+   7   1        uchar key1,key2,key;
+   8   1        KEY=0xf0;
+   9   1        key1=KEY&0xf0;//保留高四位
+  10   1        KEY=0x0f;
+  11   1        key2=KEY&0x0f;//保留低四位
+  12   1        key=key1|key2;
+  13   1        switch(key_mem)
+  14   1        {
+  15   2          case key_state0:
+  16   2            if(key!=no_key)key_mem=key_state1;
+  17   2          break;
+  18   2          case key_state1:
+  19   2            if(key==no_key)key_mem=key_state0;//判断按键误触
+  20   2            else//确定按下
+  21   2            {
+  22   3              switch(key)
+  23   3              {
+  24   4                case 0xee:key_sign='1';break;
+  25   4                case 0xde:key_sign='2';break;
+  26   4                case 0xbe:key_sign='3';break;
+  27   4                case 0x7e:key_sign='a';break;
+  28   4                case 0xed:key_sign='4';break;
+  29   4                case 0xdd:key_sign='5';break;
+  30   4                case 0xbd:key_sign='6';break;
+  31   4                case 0x7d:key_sign='b';break;
+  32   4                case 0xeb:key_sign='7';break;
+  33   4                case 0xdb:key_sign='8';break;
+  34   4                case 0xbb:key_sign='9';break;
+  35   4                case 0x7b:key_sign='c';break;
+  36   4                case 0xe7:key_sign='*';break;
+  37   4                case 0xd7:key_sign='0';break;
+  38   4                case 0xb7:key_sign='#';break;
+  39   4                case 0x77:key_sign='d';break;
+  40   4              }
+  41   3              key_mem=key_state2;
+  42   3            }
+  43   2            break;
+  44   2          case key_state2:
+  45   2            if(key==no_key)//按键松开
+  46   2              key_mem=key_state0;
+  47   2            break;
+  48   2        }
+  49   1        return key_sign;
+  50   1      }
+  51          
+  52          
+
+
+C51 COMPILER V9.60.0.0   KEYBOARD                                                          12/28/2020 08:57:05 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    210    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,59 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              12/28/2020 08:57:04 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include"keyboard.h"
+   2          #include"lcd12864.h"
+   3          #include<reg52.h>
+   4          extern void ft_dis(uchar *ft_sign);
+   5          extern void YN_password(char* flag,uchar* ft_sign);
+   6          extern void dis_();
+   7          
+   8          void main()
+   9          {
+  10   1        while(1)
+  11   1        {
+  12   2          char flag=0;
+  13   2          uchar ft_sign=0;
+  14   2          init_lcd();//≥ı ºªØœ‘ æ∆¡
+  15   2          while(1)
+  16   2          {
+  17   3            if(flag<0)flag=0;
+  18   3            YN_password(&flag,&ft_sign);
+  19   3            ft_dis(&ft_sign);
+  20   3            if(ft_sign==1)
+  21   3            {
+  22   4              delay(50000);
+  23   4              delay(50000);
+  24   4              delay(50000);
+  25   4              delay(50000);
+  26   4              lcd_cls();
+  27   4              break;
+  28   4            }
+  29   3          }
+  30   2          while(1)
+  31   2          {
+  32   3            dis_();
+  33   3          }
+  34   2        }
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     93    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
